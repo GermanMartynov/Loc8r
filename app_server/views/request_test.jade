@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    h2 req.hostname : #{req.hostname}
+    h2 req.headers : #{req.headers}
+      each val in req.headers
+        ul= val
+    h2 req.ip : #{req.ip}
+
