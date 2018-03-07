@@ -1,3 +1,4 @@
 module.exports.index = function(req, res, next) {
-    res.render('request_test', { title: 'Проверка объекта запроса', req: req });
+    res.send(''process.env.MONGOLAB_URI:' + process.env.MONGOLAB_URI +
+        '<br/>process.env.NODE_ENV:' + process.env.NODE_ENV);
 };
