@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-var dbURI = 'mongodb://localhost/Loc8r';
+var dbURI = 'mongodb://localhost/Loc8r';  // локальная база данных
+var mlab_URI = 'mongodb://box1612:a7658653w@ds261128.mlab.com:61128/box1612-dev'; // удаленная база на mlab.com
+
 mongoose.connect(dbURI);
 
 mongoose.connection.on('conected', function(){
