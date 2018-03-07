@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 require('./app_server/models/db');
 
-var index = require('./app_server/routes/index');
+var routes = require('./app_server/routes/index');
+var routesApi = require('./app_api/routes/index');
+
 var users = require('./app_server/routes/users');
 var request = require('./app_server/routes/request');
 
@@ -25,7 +27,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/')); //место, где на самом деле лежит jquery
 
-app.use('/', index);
+app.use('/', routes);
+app.use('/api', routesApi);
+
 app.use('/users', users);
 
 // тестовая проверка объектов запроса и ответа
