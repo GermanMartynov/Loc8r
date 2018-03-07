@@ -1,8 +1,14 @@
 var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/Loc8r';  // локальная база данных
-var mlab_URI = 'mongodb://box1612:a7658653w@ds261128.mlab.com:61128/box1612-dev'; // удаленная база на mlab.com
 
+if (process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MONGOLAB_URI;
+    // ссылка на облачную базу данных mangoLab содержит переменная среды MONGOLAB_URI
+    // переменную среды MONGOLAB_URI можно установить из консоли на сервере провайдера.
+    // Например на heroku для приложения infinite-sands-81273 переменная среды устанавливается так:
+    // $ heroku config:set MONGOLAB_URI=mongodb://<user db>:<passw>@ds261128.mlab.com:61128/box1612-dev --app infinite-sands-81273
+}
 mongoose.connect(dbURI);
 
 mongoose.connection.on('conected', function(){
