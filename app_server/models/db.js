@@ -11,7 +11,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 mongoose.connect(dbURI);
 
-mongoose.connection.on('conected', function(){
+
+/*   контроль запуска и остановки подключения к базе данных  */
+mongoose.connection.on('connected', function(){
     console.log('Mogoose connected to ' + dbURI);
 });
 
@@ -30,6 +32,7 @@ var gracefulShutdown = function(msg, callback) {
         callback();
     });
 };
+
 //запускаем прослушивание события SIGUSR2 , которое генерит nodemon при перезапуске приложения
 process.once('SIGUSR2', function(){
     gracefulShutdown('nodemon restart', function(){ // выводим сообщение и убиваем соединение с db
