@@ -6,14 +6,14 @@ var sendJsonResponce = function(res, status, content){
     res.json(content);
 };
 
-// GET
+// GET запрос местоположения по locationid
 module.exports.locationsReadOne = function (req, res) {
     if(req.params && req.params.locationid) { // есть ли в параметрах locationid?
         Loc
             .findById(req.params.locationid) // получаем из параметров locationid
             .exec(function (err, location) { // описываем обратный вызов для обработки ответных параметров
                 if(!location) { // если mongoose не вернул местоположение
-                    sendJsonResponce(res, 404, {"message" : "No locationid not found"});
+                    sendJsonResponce(res, 404, {"message" : "locationid not found"});
                     return;
                 } else if (err){ // если mongoose  вернул ошибку
                     sendJsonResponce(res, 404, err);
