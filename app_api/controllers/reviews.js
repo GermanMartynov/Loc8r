@@ -6,12 +6,14 @@ var sendJsonResponce = function(res, status, content){
     res.json(content);
 };
 
-// GET запрос отдельного отзыва по locationid
+// GET запрос отдельного отзыва
 module.exports.reviewsReadOne = function (req, res) {
+    console.log('req.params.locationid', req.params.locationid);
+    console.log('req.params.reviewid', req.params.reviewid);
     if(req.params && req.params.locationid) { // есть ли в параметрах locationid?
         Loc
             .findById(req.params.locationid) // получаем из параметров locationid
-            .select('name rewiews') // выбираем имя местоположения и отзывы о нем
+            .select('name reviews') // выбираем имя местоположения и отзывы о нем
             .exec(function (err, location) { // описываем обратный вызов для обработки ответных параметров
                 var response, review;
                 if(!location) { // если mongoose не вернул местоположение
@@ -36,6 +38,7 @@ module.exports.reviewsReadOne = function (req, res) {
                     }
                     sendJsonResponce(res, 200, response);   // Все ок
                 } else { // если отзывов не найдено
+                    // console.log('location.reviews.length :', location.reviews.length);
                     sendJsonResponce(res, 404, {"message" : "No reviews found"});
                 }
             });

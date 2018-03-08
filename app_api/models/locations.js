@@ -25,7 +25,7 @@ var locationSchema = new mongoose.Schema({
     coords:{type:[Number], index: '2dsphere'},
     openingTimes: [openingTimeSchema], //ссылка на схему часов работы
     reviews: [reviewSchema]  //ссылка на схему отзыва
-})
+});
 
 // создаем модель Location на основе схемы locationSchema
 mongoose.model('Location', locationSchema);
